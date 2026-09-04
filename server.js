@@ -21,7 +21,7 @@ app.post("/chat", async (req, res) => {
 
     const response = await openai.responses.create({
       model: "gpt-5.6-luna",
-      input: message,
+      ,input: "Reply in the same language as the user's message. If the user writes in English, answer in English. If the user writes in Hindi, answer in Hindi. If the user writes in Hinglish, answer in Hinglish.\n\nUser message: " + message,
     });
 
     res.json({
