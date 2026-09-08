@@ -14,7 +14,7 @@ const openai = new OpenAI({
 app.get("/", (req, res) => {
   res.send("AI Chatbot Backend is running!");
 });
-
+let previousResponseId = null;
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
@@ -22,8 +22,9 @@ app.post("/chat", async (req, res) => {
     const response = await openai.responses.create({
       model: "gpt-5.6-luna",
       ,input: "Reply in the same language as the user's message. If the user writes in English, answer in English. If the user writes in Hindi, answer in Hindi. If the user writes in Hinglish, answer in Hinglish.\n\nUser message: " + message,
+      previous_response_id: previousResponseId || undefined,
     });
-
+previousResponseId = response.id;
     res.json({
       reply: response.output_text,
     });
