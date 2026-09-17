@@ -14,7 +14,10 @@ const openai = new OpenAI({
 app.get("/", (req, res) => {
   res.send("AI Chatbot Backend is running!");
 });
-let previousResponseId = null;
+app.post("/new-chat", (req, res) => {
+  previousResponseId = null;
+  res.json({ success: true });
+});
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
