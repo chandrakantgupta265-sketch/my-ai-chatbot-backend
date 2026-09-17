@@ -18,6 +18,7 @@ app.post("/new-chat", (req, res) => {
   previousResponseId = null;
   res.json({ success: true });
 });
+let previousResponseId = null;
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
